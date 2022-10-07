@@ -13,19 +13,19 @@ class PantIntro{
   Boton btnext;
   
   PantIntro(){
-    btncfg=new Boton(400,200,200,60,"Config");
-    btncrd=new Boton(400,300,200,60,"Créditos");
-    btnscr=new Boton(400,400,200,60,"Scores");
-    btngme=new Boton(400,500,200,60,"Jugar");
-    btnins=new Boton(400,600,200,60,"Guía");
-    btnext=new Boton(400,700,200,60,"Salir");
+    btncfg=new Boton(400,200,200,60,0);
+    btncrd=new Boton(400,300,200,60,1);
+    btnscr=new Boton(400,400,200,60,2);
+    btngme=new Boton(400,500,200,60,3);
+    btnins=new Boton(400,600,200,60,4);
+    btnext=new Boton(400,700,200,60,5);
   }
   
   void display(){
     background(color(0,150,0));
     stroke(color(255,255,255));
     textAlign(CENTER,CENTER);
-    text("Pantalla de Intro",400,100);
+    text(11,400,100);
     btncfg.display();
     btncrd.display();
     btnscr.display();

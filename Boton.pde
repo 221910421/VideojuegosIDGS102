@@ -11,11 +11,11 @@ class Boton{
   int cy;          //posición en Y del centro del botón
   int an;          //anchura del botón
   int al;          //altura del botón
-  String t;           //texto del botón 
+  int t;           //texto del botón 
   
   //constructor: los primeros dos parámetros son la posición, el segundo par sus medidas y el quinto
   //parámetro el índice del texto de idioma específico
-  Boton(int x,int y,int b, int a, String s){
+  Boton(int x,int y,int b, int a, int s){
     cx=x;
     cy=y;
     an=b;

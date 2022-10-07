@@ -13,13 +13,17 @@ final int PNCFG=3;
 final int PNCRD=4;
 final int PNINS=5;
 final int PNSCR=6;
+final int IDESP=0;
+final int IDING=1;
 GameControl gc;
+Idiomas idi;
 
 //sección de módulos principales
 void setup(){
   size(800,800);
   frameRate(60);
   surface.setTitle("Creación de Videojuegos 2022");
+  idi = Idiomas(IDESP, 13);
   gc=new GameControl();
 }
 
