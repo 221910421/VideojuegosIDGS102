@@ -15,7 +15,7 @@ class Boton{
   
   //constructor: los primeros dos parámetros son la posición, el segundo par sus medidas y el quinto
   //parámetro el índice del texto de idioma específico
-  Boton(int x,int y,int b, int a, int s){
+  Boton(int x,int y,int b,int a,int s){
     cx=x;
     cy=y;
     an=b;
@@ -31,7 +31,7 @@ class Boton{
     rect(cx,cy,an,al);
     fill(255);
     textAlign(CENTER,CENTER);
-    text(t,cx,cy);
+    text(idi.mensaje(t),cx,cy);
   }
   
   

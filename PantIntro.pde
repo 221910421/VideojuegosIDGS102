@@ -25,7 +25,7 @@ class PantIntro{
     background(color(0,150,0));
     stroke(color(255,255,255));
     textAlign(CENTER,CENTER);
-    text(11,400,100);
+    text(idi.mensaje(11),400,100);
     btncfg.display();
     btncrd.display();
     btnscr.display();

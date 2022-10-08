@@ -23,7 +23,7 @@ void setup(){
   size(800,800);
   frameRate(60);
   surface.setTitle("Creación de Videojuegos 2022");
-  idi = Idiomas(IDESP, 13);
+  idi=new Idiomas(IDESP,13);  //temporal hasta que se implemente archivo de config.
   gc=new GameControl();
 }
 
@@ -34,17 +34,9 @@ void draw(){
 //el contenido en esta versión de mouseReleased y KeyReleased son temporales, solo
 //para ilustrar el funcionamiento básico de los métodos.
 void mouseReleased(){
-  /*if(mouseButton==LEFT)
-    gc.nextPant();
-  if(mouseButton==RIGHT)
-    gc.prevPant();*/
   gc.mouseControl(mouseX,mouseY,mouseButton);  
 }
 
 void keyReleased(){
-  /*if(keyCode==LEFT || key=='a' || key=='A')
-    gc.nextPant();
-  if(keyCode==RIGHT || key=='d' || key=='D')
-    gc.prevPant();*/
   gc.keyControl();  
 }
