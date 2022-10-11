@@ -17,13 +17,15 @@ final int IDESP=0;
 final int IDING=1;
 GameControl gc;
 Idiomas idi;
+ConfigFiles cf;
 
 //sección de módulos principales
 void setup(){
   size(800,800);
   frameRate(60);
   surface.setTitle("Creación de Videojuegos 2022");
-  idi=new Idiomas(IDESP,13);  //temporal hasta que se implemente archivo de config.
+  cf = new ConfigFiles();
+  idi=new Idiomas(cf.lang,cf.ns);
   gc=new GameControl();
 }
 
