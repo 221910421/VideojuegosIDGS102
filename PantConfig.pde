@@ -8,11 +8,13 @@ class PantConfig{
   Boton btnidi;
   Boton btnsav;
   Boton btncnc;//Cancelar
+  Boton btngmd;//Graficos
   
   PantConfig(){
     btnidi = new Boton(400, 350, 200, 60, 13);
     btnsav = new Boton(250, 550, 200, 60, 14);
     btncnc = new Boton(550, 550, 200, 60, 15);
+    btngmd = new Boton(400, 450, 200, 60, 15);
   }
   
   void display(){
@@ -23,6 +25,7 @@ class PantConfig{
     btnidi.display();
     btnsav.display();
     btncnc.display();
+    btngmd.display();
   }
 
   void mouseControl(int x, int y, int b){
@@ -32,5 +35,7 @@ class PantConfig{
        cf.saveConfig(idi);
     if(btncnc.isClicked(x,y,b))
        gc.setPantAct(PNINT);
-  }
+    if(btngmd.isClicked(x,y,b))
+        gc.setPantAct(PNINT);
+  }  
 }

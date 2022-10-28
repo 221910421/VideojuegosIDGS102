@@ -21,9 +21,11 @@ class Idiomas{
   void cargaIdioma(int i){
     int n;
     file=loadStrings((i==IDESP)?"esp.lang":"eng.lang");
-    for(n=0; n<nm;n++)
+    for(n=0; n<nm;n++){
+      println(idiomas[n][i]=file[n]);
       idiomas[n][i]=split(file[n],'=')[1];
-  }
+      }
+   }
   
   void setIdioma(int i){
     idiact=i;
