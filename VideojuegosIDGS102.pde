@@ -15,17 +15,25 @@ final int PNINS=5;
 final int PNSCR=6;
 final int IDESP=0;
 final int IDING=1;
+PFont letra;
+PImage imgicon;
 GameControl gc;
 Idiomas idi;
 ConfigFiles cf;
+Bitacora bit;
 
 //sección de módulos principales
 void setup(){
   size(800,800);
   frameRate(60);
   surface.setTitle("Creación de Videojuegos 2022");
+  imgicon=loadImage("sprites/per/per0.png");
+  surface.setIcon(imgicon);
   cf=new ConfigFiles();
+  bit = new Bitacora(/*cf.logact*/ true);
   idi=new Idiomas(cf.lang,cf.ns);  //temporal hasta que se implemente archivo de config.
+  letra = createFont("FiraCode Nerd Font", 14);
+  textFont(letra);
   gc=new GameControl();
 }
 

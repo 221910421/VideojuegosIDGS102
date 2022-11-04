@@ -41,6 +41,7 @@ class Reloj{
         segs=0;
         mins++;
       }
+      bit.agregaDatosLn("Tiempo="+mins+":"+((segs<10)?"0":"")+segs);
       tmp.activate();
     }
   }

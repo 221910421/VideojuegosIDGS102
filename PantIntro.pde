@@ -46,6 +46,7 @@ class PantIntro{
     if(btnins.isClicked(x,y,b))
       gc.setPantAct(PNINS);
     if(btnext.isClicked(x,y,b))
+      bit.cierraBitacora();
       exit();
   }
 }
