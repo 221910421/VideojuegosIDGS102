@@ -1,7 +1,7 @@
 //Módulo PantIntro 
-//elaborado por: Miguel Betzay Dominguez Diaz
+//elaborado por: Rubén Dario Hernandez Mendo
 //fecha de creación: 30 de septiembre de 2022
-//fecha de ultima modificación: 3 de octubre de 2022
+//fecha de ultima modificación: 7 de octubre de 2022
 //comentario: Implementa la clase PantIntro, la cual se encargará de controlar la
 //pantalla de introducción del juego.
 class PantIntro{

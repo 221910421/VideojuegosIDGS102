@@ -24,8 +24,8 @@ void setup(){
   size(800,800);
   frameRate(60);
   surface.setTitle("Creación de Videojuegos 2022");
-  cf = new ConfigFiles();
-  idi=new Idiomas(cf.lang,cf.ns);
+  cf=new ConfigFiles();
+  idi=new Idiomas(cf.lang,cf.ns);  //temporal hasta que se implemente archivo de config.
   gc=new GameControl();
 }
 
@@ -40,5 +40,5 @@ void mouseReleased(){
 }
 
 void keyReleased(){
-  gc.keyControl();  
+  
 }

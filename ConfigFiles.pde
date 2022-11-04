@@ -1,30 +1,33 @@
-//Proyecto  
-//elaborado por: Miguel Betzay Dominguez Diaz
-//fecha de creación: 26 de septiembre de 2022
-//fecha de ultima modificación: 10 de octubre de 2022
-//comentario: Contiene los archivos de configuración.
-
+//Módulo ConfigFiles 
+//elaborado por: Rubén Dario Hernandez Mendo
+//fecha de creación: 10 de octubre de 2022
+//fecha de ultima modificación: 29 de octubre de 2022
+//comentario: Define la clase ConfigFiles, la cual permite configurar ciertas
+//características del juego para que sean cargadas durante el arranque
 class ConfigFiles{
   String file[];
   String save;
   //parámetros a guardar
-  int lang;  //idioma activo
-  int ns;    //número de mensajes de idiomas
-  int bgdx;  //velocidad horizontal del fondo
-  int bgdy;  //velocidad vertical del fondo
-  int fgdx;  //velocidad horizontal del frente
-  int fgdy;  //velocidad vertical del frente
-  int prdxu; //velocidad horizontal de ascenso del personaje
-  int prdyu; //velocidad vertical de ascenso del personaje
-  int prdxd; //velocidad horizontal de descenso del personaje
-  int prdyd; //velocidad vertical de descenso del personaje
-  int nbg;   //número de imágenes de fondo
-    int nfg;   //número de imágenes de frente
-    int bgli;
-    int bgld;
-    int fgli;
-    int fgld;
-    boolean gmode;
+  int lang;       //idioma activo
+  int ns;         //número de mensajes de idiomas
+  int bgdx;       //velocidad horizontal del fondo
+  int bgdy;       //velocidad vertical del fondo
+  int fgdx;       //velocidad horizontal del frente
+  int fgdy;       //velocidad vertical del frente
+  int prdxu;      //velocidad horizontal de ascenso del personaje
+  int prdyu;      //velocidad vertical de ascenso del personaje
+  int prdxd;      //velocidad horizontal de descenso del personaje
+  int prdyd;      //velocidad vertical de descenso del personaje
+  int nbg;        //número de imágenes de fondo distintas
+  int nfg;        //número de imágenes de frente distintas
+  int bgli;       //limite izquierdo para el fondo
+  int bgld;       //limite derecho para el fondo
+  int fgli;       //limite izquierdo para el frente
+  int fgld;       //limite derecho para el frente
+  int nprc;       //numero de sprites del personaje, correr
+  int prfc;       //numero de frames que dura un sprite para correr
+  
+  boolean gmode;  //modo gráfico: true=sprites false=figuras
   
   ConfigFiles(){
     file=loadStrings("config.dat");
@@ -44,14 +47,15 @@ class ConfigFiles{
       if(isData("prdyu",i))    prdyu=loadData(i);
       if(isData("prdxd",i))    prdxd=loadData(i);
       if(isData("prdyd",i))    prdyd=loadData(i);
-        if(isData("nbg",i))      nbg=loadData(i);
-        if(isData("nfg",i))      nfg=loadData(i);
-        if(isData("bgli",i))     bgli=loadData(i);
-        if(isData("bgld",i))     bgld=loadData(i);
-        if(isData("fgli",i))     fgli=loadData(i);
-        if(isData("fgld",i))     fgld=loadData(i);
-        if(isData("gmode",i)) gmode=loadBoolData(i);
-
+      if(isData("gmode",i))    gmode=loadBoolData(i);
+      if(isData("nbg",i))      nbg=loadData(i);
+      if(isData("nfg",i))      nfg=loadData(i);
+      if(isData("bgli",i))     bgli=loadData(i);
+      if(isData("bgld",i))     bgld=loadData(i);
+      if(isData("fgli",i))     fgli=loadData(i);
+      if(isData("fgld",i))     fgld=loadData(i);
+      if(isData("nprc",i))     nprc=loadData(i);
+      if(isData("prfc",i))     prfc=loadData(i);
     }
   }
   
@@ -62,7 +66,7 @@ class ConfigFiles{
   int loadData(int d){
     return int(split(file[d],'=')[1]);
   }
-
+  
   boolean loadBoolData(int d){
     return split(file[d],'=')[1].equals("ON");
   }
@@ -80,13 +84,15 @@ class ConfigFiles{
     addSave("prdyu",prdyu);
     addSave("prdxd",prdxd);
     addSave("prdyd",prdyd);
+    addSave("gmode",gmode);
     addSave("nbg",nbg);
     addSave("nfg",nfg);
     addSave("bgli",bgli);
     addSave("bgld",bgld);
     addSave("fgli",fgli);
     addSave("fgld",fgld);
-    addSave("gmode",gmode);
+    addSave("nprc",nprc);
+    addSave("prfc",prfc);
     file=split(save,';');
     saveStrings("data/config.dat",file);
   }
@@ -94,10 +100,8 @@ class ConfigFiles{
   void addSave(String s,int d){
     save=save+"#"+s+"="+d+";";
   }
-
-    void addSave(String s,boolean d){
-        if(d) save=save+"#"+s+"=ON;";
-        else save=save+"#"+s+"=OFF;";
-    }
-
+  
+  void addSave(String s,boolean d){
+    save=save+"#"+s+"="+((d)?"ON":"OFF")+";";
+  }
 }

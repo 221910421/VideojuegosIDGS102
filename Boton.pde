@@ -1,7 +1,7 @@
 //Modulo Boton
-//elaborado por: Miguel Betzay Dominguez Diaz
+//elaborado por: Rubén Dario Hernandez Mendo
 //fecha de creación: 3 de octubre de 2021
-//fecha de ultima modificación: 3 de octubre de 2021
+//fecha de ultima modificación: 7 de octubre de 2021
 //comentario: la clase botoón permite indicar acciones dentro del juego, se usa 
 //para elegir opciones del menú principal y la mayoría de comandos del juego. 
 //Por su implementación solo contiene texto en su interior y un fondo sencillo de
@@ -34,6 +34,9 @@ class Boton{
     text(idi.mensaje(t),cx,cy);
   }
   
+  void setMessage(int m){
+    t=m;
+  }
   
   //manejador de evento, devuelve true si el clic ocurrió sobre él
   boolean isClicked(int x,int y, int b){

@@ -1,13 +1,18 @@
+//Módulo Dado 
+//elaborado por: Rubén Dario Hernandez Mendo
+//fecha de creación: 23 de octubre de 2022
+//fecha de ultima modificación: 23 de octubre de 2022
+//comentario: Implementa una clase para usar dados y generar valores aleatorios
 class Dado{
-    int nc;//numero caras
-    int t; //ultima tirada
-
-    Dado(int n){
-        nc=n;
-    }
-
-    int tirar(){
-        t=int(random(1,nc+1));//numero aleatorio entre 1 y 6 o numero de caras
-        return t;
-    }
+  int nc;
+  int t;
+  
+  Dado(int n){
+    nc=n;
+  }
+  
+  int tirar(){
+    t=int(random(1,nc+1));
+    return t;
+  }
 }
