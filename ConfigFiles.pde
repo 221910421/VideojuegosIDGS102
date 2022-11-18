@@ -1,7 +1,7 @@
 //Módulo ConfigFiles 
 //elaborado por: Rubén Dario Hernandez Mendo
 //fecha de creación: 10 de octubre de 2022
-//fecha de ultima modificación: 29 de octubre de 2022
+//fecha de ultima modificación: 14 de noviembre de 2022
 //comentario: Define la clase ConfigFiles, la cual permite configurar ciertas
 //características del juego para que sean cargadas durante el arranque
 class ConfigFiles{
@@ -26,8 +26,15 @@ class ConfigFiles{
   int fgld;       //limite derecho para el frente
   int nprc;       //numero de sprites del personaje, correr
   int prfc;       //numero de frames que dura un sprite para correr
-  
+  int fntstd;     //tamaño estándar de texto
+  int fntbig;     //tamaño de texto grande
+  String fntname; //nombre de la tipografía a usar
+  boolean logact; //estado de la bitácora
   boolean gmode;  //modo gráfico: true=sprites false=figuras
+  int hpmax;      //puntos máximos de vida del personaje
+  int hphit;      //daño recibido por golpe al personaje
+  int hprcv;      //salud recuperada por item curativo
+  int spdcn;      //velocidad horizontal de las monedas
   
   ConfigFiles(){
     file=loadStrings("config.dat");
@@ -56,6 +63,14 @@ class ConfigFiles{
       if(isData("fgld",i))     fgld=loadData(i);
       if(isData("nprc",i))     nprc=loadData(i);
       if(isData("prfc",i))     prfc=loadData(i);
+      if(isData("fntstd",i))   fntstd=loadData(i);
+      if(isData("fntbig",i))   fntbig=loadData(i);
+      if(isData("fntname",i))  fntname=loadStrData(i);
+      if(isData("logact",i))   logact=loadBoolData(i);
+      if(isData("hpmax",i))    hpmax=loadData(i);
+      if(isData("hphit",i))    hphit=loadData(i);
+      if(isData("hprcv",i))    hprcv=loadData(i);
+      if(isData("spdcn",i))    spdcn=loadData(i);
     }
   }
   
@@ -69,6 +84,10 @@ class ConfigFiles{
   
   boolean loadBoolData(int d){
     return split(file[d],'=')[1].equals("ON");
+  }
+  
+  String loadStrData(int d){
+    return split(file[d],'=')[1];
   }
   
   void saveConfig(Idiomas i){
@@ -93,6 +112,14 @@ class ConfigFiles{
     addSave("fgld",fgld);
     addSave("nprc",nprc);
     addSave("prfc",prfc);
+    addSave("fntname",fntname);
+    addSave("fntstd",fntstd);
+    addSave("fntbig",fntbig);
+    addSave("logact",logact);
+    addSave("hpmax",hpmax);
+    addSave("hphit",hphit);
+    addSave("hprcv",hprcv);
+    addSave("spdcn",spdcn);
     file=split(save,';');
     saveStrings("data/config.dat",file);
   }
@@ -103,5 +130,9 @@ class ConfigFiles{
   
   void addSave(String s,boolean d){
     save=save+"#"+s+"="+((d)?"ON":"OFF")+";";
+  }
+  
+  void addSave(String s,String d){
+    save=save+"#"+s+"="+d+";";
   }
 }

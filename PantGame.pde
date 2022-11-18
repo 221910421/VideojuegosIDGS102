@@ -1,7 +1,7 @@
 //Módulo PantGame 
 //elaborado por: Rubén Dario Hernandez Mendo
 //fecha de creación: 30 de septiembre de 2022
-//fecha de ultima modificación: 31 de octubre de 2022
+//fecha de ultima modificación: 18 de noviembre de 2022
 //comentario: Implementa la clase PantGame, la cual controla las acciones del 
 //juego.
 class PantGame{
@@ -11,13 +11,16 @@ class PantGame{
   int ffg[];
   SpriteSet ssbg;
   SpriteSet ssfg;
-  SpriteSet sspr;
+  Personaje per;
+  ArrayList <Coin> monedas;
+  Coin coin;
   PImage imghud;
-  Punto2D per;
   Dado dbg;
   Dado dfg;
+  Dado dcoin;
   Reloj rlj;
   boolean dir;
+  boolean rst;
   
   PantGame(){
     dbg=new Dado(cf.nbg);
@@ -30,15 +33,33 @@ class PantGame{
     creaP2DArray(fg,ffg,dfg,100,675,200,0);
     ssbg=new SpriteSet("sprites/bg/","bg",".png",cf.nbg,6,false,0);
     ssfg=new SpriteSet("sprites/fg/","fg",".png",cf.nfg,6,false,0);
-    per=new Punto2D(150,700);
-    sspr=new SpriteSet("sprites/per/","per",".png",cf.nprc,cf.prfc,true,0);
     imghud=loadImage("sprites/HUD/hud.png");
+    per=new Personaje();
+    coin=new Coin(900,700);
+    monedas=new ArrayList <Coin>();
+    dcoin=new Dado(2);
+    iniciaMonedas();
     rlj=new Reloj();
     rlj.iniciaReloj();
     dir=true;
+    rst=false;
+  }
+  
+  void iniciaMonedas(){
+    Coin c;
+    for(int i=0;i<3;i++){
+      c=new Coin(900+i*75,(dcoin.tirar()==1)?500:700);
+      monedas.add(c);
+      println(c);
+    }
   }
   
   void display(){
+    music();
+    if(rst){
+      resetGame();
+      rst=false;
+    }
     planoFondo();
     planoNivel();
     planoFrente();
@@ -55,15 +76,14 @@ class PantGame{
   }
   
   void planoNivel(){
-    ellipseMode(RADIUS);
-    imageMode(CENTER);
-    if(cf.gmode)
-      sspr.display(per.getX(),per.getY(),200,200);
-    else{
-      stroke(0,120,0);
-      fill(0,200,0);
-      circle(per.getX(),per.getY(),75);
-    }  
+    per.display();
+    displayMonedas();
+    //coin.display();
+  }
+  
+  void displayMonedas(){
+    for(Coin c:monedas)
+      c.display();
   }
   
   void planoFrente(){
@@ -88,12 +108,16 @@ class PantGame{
       rect(400,60,800,120);
     }  
     fill(0);
+    per.drawLifeBar(150,30);
+    per.drawScore(400,30);
     rlj.display(650,60);
   }
   
   void gameProgress(){
     muevePlano(bg,fbg,dbg,cf.bgdx,cf.bgdy,cf.bgli,cf.bgld);  
     muevePlano(fg,ffg,dfg,cf.fgdx,cf.fgdy,cf.fgli,cf.fgld); 
+    coin.move();
+    revisaColisiones();
     rlj.controlReloj();
     //per.move(((dir)?cf.prdxu:cf.prdxd),((dir)?cf.prdyu:cf.prdyd));
     //if(per.getY()==500 || per.getY()==700) dir=!dir;  
@@ -119,11 +143,44 @@ class PantGame{
   void graficaPlano(Punto2D p[],SpriteSet s,int f[],int x,int y,boolean t){
     for(int i=0;i<p.length;i++)
       if(cf.gmode){
-        //if(t && p[i].getX()<=300 && p[i].getY()>=0) tint(255,128);
+        if(t && p[i].getX()<=300 && p[i].getY()>=0) tint(255,128);
         image(s.getSprite(f[i]),p[i].getX(),p[i].getY());
-        //if(t && p[i].getX()<=300 && p[i].getY()>=0) noTint();
+        if(t && p[i].getX()<=300 && p[i].getY()>=0) noTint();
       }  
       else
         rect(p[i].getX(),p[i].getY(),x,y);  
+  }
+  
+  void resetGame(){
+    rlj.resetReloj();
+    rlj.iniciaReloj();
+  }
+  
+  void mouseControl(int x,int y,int b){
+    rlj.detenReloj();
+    rst=true;
+    gc.musicManager(MSCOFF);
+    gc.setPantAct(PNINT);
+  }
+  
+  void revisaColisiones(){
+    int i=0;
+    for(Coin c:monedas){
+      if(per.cls.isColision(c.cls)){
+        per.incrScore();
+        c.toggleActive();
+        monedas.remove(monedas.get(i));
+        Coin nc=new Coin(900+i*75,dcoin.tirar());
+        monedas.add(nc);
+      }
+      i++;
+    }
+    /*if(per.cls.isColision(coin.cls)){
+      println("Hay colision");
+      per.incrScore();
+      coin.toggleActive();
+      coin=new Coin(900,((dcoin.tirar()==1)?500:700));
+    }
+    else println("No col");*/
   }
 }
