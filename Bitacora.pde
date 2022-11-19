@@ -21,7 +21,7 @@ class Bitacora{
   
   //permite generar la fecha y hora del sistema
   String agregaFechaHora(){
-    return ""+month()+"-"+day()+"-"+year()+" "+hour()+" con "+minute();
+    return ""+month()+"-"+day()+"-"+year()+" "+hour()+" con "+minute()+"-"+second();
   }
   
   //registra un bloque de datos y agrega un salto de línea.
@@ -31,7 +31,7 @@ class Bitacora{
       output.flush();
     }  
   }
-  
+
   void agregaDatosLn(String []s,int d[]){
     if(active){
       if(s.length==d.length)
@@ -62,8 +62,16 @@ class Bitacora{
   //cierra la bitácora, indicando la hora en que termina la ejecución del juego.
   void cierraBitacora(){
     if(active){
+            line(0, 0, width, height);
+      String fps = "";
+    if(frameRate<60){
+      fps="bajo";
+    }else if (frameRate<=60){
+      fps="normal"; 
+    }
       String s="fin de test ";
       s=s+agregaFechaHora();
+      s=s+" fps="+fps;
       output.println(s);
       output.flush();
       output.close();

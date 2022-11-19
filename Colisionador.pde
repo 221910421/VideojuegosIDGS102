@@ -26,30 +26,57 @@ class Colisionador{
     active=true;
   }
   
-  void moverCol(int x, int y){
+  void moverCol(int x,int y){
     pos.setX(x);
     pos.setY(y);
-
   }
-
+  
   void moverCol(Punto2D p){
     pos.setX(p.getX());
     pos.setY(p.getY());
   }
-
+  
   boolean isColision(Colisionador cls){
     boolean c=false;
-    if (active && inRange(cls)){
+    if(active && inRange(cls)){
       float dx=cls.pos.getX()-pos.getX();
       float dy=cls.pos.getY()-pos.getY();
       float ds=sqrt(dx*dx+dy*dy);
-      c=ds<(rad+cls.rad);
+      c=(ds<(rad+cls.rad));
     }
+    return c;
   }
-
+  
   boolean inRange(Colisionador c){
     boolean r=false;
-    r=c.active && (aaesi.getX() < c.pos.getX() && aaeid.getX() > c.pos.getX()) && (aaesi.getY() < c.pos.getY() && aaeid.getY() > c.pos.getY());
+    r=c.active&&(aaesi.getX()<c.pos.getX()&&aaeid.getX()>c.pos.getX())&&
+                (aaesi.getY()<c.pos.getY()&&aaeid.getY()>c.pos.getY());
     return r;
+  }
+  
+  void toggleActive(){
+    active=!active;
+  }
+  
+  void activate(){
+    active=true;
+  }
+  
+  void deactivate(){
+    active=false;
+  }
+  
+  void drawAreaColision(){
+    ellipseMode(CENTER);
+    noFill();
+    stroke(0,172,0);
+    circle(pos.getX(),pos.getY(),rad*2);
+  }
+  
+  void drawRangoColision(){
+    rectMode(CORNERS);
+    noFill();
+    stroke(0,0,170);
+    rect(aaesi.getX(),aaesi.getY(),aaeid.getX(),aaeid.getY());
   }
 }
